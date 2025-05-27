@@ -29,4 +29,4 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run daily stock price script
-        run: python main.py
+        run: price_download.py
