@@ -2,9 +2,8 @@ name: Daily Stock Price Sync
 
 on:
   schedule:
-    # Run at 3:20 PM NPT (UTC+5:45) = 9:35 AM UTC (Sunday to Thursday)
-    - cron: '35 9 * * 0-4'
-  workflow_dispatch:  # allow manual run too
+    - cron: '35 9 * * 0-4'  # 3:20 PM NPT, Sunday to Thursday
+  workflow_dispatch:
 
 jobs:
   run-daily-sync:
@@ -22,17 +21,24 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install system dependencies for Chrome and ChromeDriver
+      - name: Install Chrome and ChromeDriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libxss1 libappindicator1 libindicator7 fonts-liberation libasound2 libnspr4 libx11-xcb1 xdg-utils
+          sudo apt-get install -y wget unzip xvfb curl \
+            libnss3 libxss1 libatk1.0-0 libatk-bridge2.0-0 \
+            libcups2 libx11-xcb1 libxcomposite1 libxcursor1 \
+            libxdamage1 libxi6 libgbm1 libpangocairo-1.0-0 \
+            fonts-liberation libgtk-3-0 xdg-utils
 
+          # Install Google Chrome
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
           google-chrome --version
 
-          LATEST=$(curl -sSL https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
+          # Install Chromedriver
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
+          CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" || curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
           chromedriver --version
@@ -45,7 +51,6 @@ jobs:
       - name: Decode GCP service account key
         run: |
           echo "$GCP_SA_KEY_BASE64" | base64 --decode > todaysprice-credentials.json
-        shell: bash
 
-      - name: Run price_download.py
+      - name: Run script
         run: python price_download.py
