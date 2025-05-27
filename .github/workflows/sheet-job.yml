@@ -29,4 +29,5 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run price_download.py
-        run: python price_download.py
+        run: python ./price_download.py
+
