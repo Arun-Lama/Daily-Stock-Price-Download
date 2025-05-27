@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
-from read_write_google_sheet import read_google_sheet
+from read_write_google_sheet import read_google_sheet, write_to_google_sheet
 from datetime import timedelta
 
 
