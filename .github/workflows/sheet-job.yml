@@ -1,19 +1,25 @@
-name: Run read_write_google_sheet.py daily
+name: Daily Stock Price Sync
 
 on:
   schedule:
-    - cron: '35 9 * * 0-4'  # 15:20 NPT, Sunday to Thursday
+    # Run at 3:20 PM NPT (UTC+5:45) = 9:35 AM UTC (Sunday to Thursday)
+    - cron: '35 9 * * 0-4'
+
+  workflow_dispatch:  # allow manual run too
 
 jobs:
-  run-script:
+  run-daily-sync:
     runs-on: ubuntu-latest
+
+    env:
+      GCP_SA_KEY_BASE64: ${{ secrets.GCP_SA_KEY_BASE64 }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
@@ -22,7 +28,5 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run the script
-        env:
-          GCP_SA_KEY_BASE64: ${{ secrets.GCP_SA_KEY_BASE64 }}
-        run: python read_write_google_sheet.py
+      - name: Run daily stock price script
+        run: python main.py
