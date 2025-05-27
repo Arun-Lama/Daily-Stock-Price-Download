@@ -2,7 +2,7 @@ name: Daily Stock Price Sync
 
 on:
   schedule:
-    - cron: '35 9 * * 0-4'  # 3:20 PM NPT, Sunday to Thursday
+    - cron: '35 9 * * 0-4'  # Runs at 3:20 PM NPT (UTC+5:45), Sunday to Thursday
   workflow_dispatch:
 
 jobs:
@@ -13,15 +13,15 @@ jobs:
       GCP_SA_KEY_BASE64: ${{ secrets.GCP_SA_KEY_BASE64 }}
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Python
+      - name: Set up Python 3.10
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install Chrome and ChromeDriver
+      - name: Install Google Chrome and Chromedriver
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip xvfb curl \
@@ -35,9 +35,8 @@ jobs:
           sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get -f install -y
           google-chrome --version
 
-          # Install Chromedriver
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+')
-          CHROMEDRIVER_VERSION=$(curl -sS "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}" || curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          # Download latest stable Chromedriver
+          CHROMEDRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
           wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
@@ -52,5 +51,5 @@ jobs:
         run: |
           echo "$GCP_SA_KEY_BASE64" | base64 --decode > todaysprice-credentials.json
 
-      - name: Run script
+      - name: Run stock price download script
         run: python price_download.py
