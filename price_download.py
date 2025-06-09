@@ -101,6 +101,10 @@ def download_price(google_sheet_id):
 
 price_history_sheet_id = "1n_QX2H3HEM1wYbEQmHV4fYBwfDzd19sBEiOv4MBXrFo"
 downloaded_price_history = download_price(price_history_sheet_id)
-if  len(downloaded_price_history) != 0:
-    write_to_google_sheet(downloaded_price_history, price_history_sheet_id, mode='append')
+from datetime import datetime
+
+dateti = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+print(f'Stock price downloaded for {dateti}')
+# if  len(downloaded_price_history) != 0:
+#     write_to_google_sheet(downloaded_price_history, price_history_sheet_id, mode='append')
     
