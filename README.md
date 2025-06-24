@@ -61,7 +61,7 @@ If you'd like to test the script locally:
 
 ```bash
 pip install -r requirements.txt
-python download_indices.py
+python price_download.py
 ```
 
 Make sure to export your environment variable before running:
@@ -91,7 +91,7 @@ You can also manually trigger the workflow via the **"Run Workflow"** button in 
 ├── .github/
 │   └── workflows/
 │       └── daily-stock-price.yml
-├── download_indices.py
+├── price_download.py
 ├── read_write_google_sheet.py
 ├── requirements.txt
 └── README.md
