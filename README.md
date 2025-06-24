@@ -17,7 +17,7 @@
 - 📈 **Clean Data Processing** using `pandas`
 - 🔄 **Google Sheets Synchronization** via `gspread`
 - 🤖 **Headless Browser Automation** with `Selenium`
-- 📅 **Scheduled Execution** via GitHub Actions (⏰ Every Sunday–Thursday at 3:25 PM NPT)
+- 📅 **Scheduled Execution** via GitHub Actions (⏰ Every Sunday–Thursday at 3:20 PM NPT)
 - 🔐 **Secure Credential Management** using Base64-encoded environment variables
 - 📋 **Comprehensive Logging** and easy debugging
 - ⚙️ **Lightweight and Serverless** – no hosting or cron job required
