@@ -7,7 +7,7 @@
 
 ---
 
-## 📊 [View Live Google Sheet](#) <!-- 🔗 Replace `#` with the actual URL -->
+## 📊 [View Live Google Sheet](https://docs.google.com/spreadsheets/d/1n_QX2H3HEM1wYbEQmHV4fYBwfDzd19sBEiOv4MBXrFo/edit?usp=sharing) <!-- 🔗 Replace `#` with the actual URL -->
 
 ---
 
