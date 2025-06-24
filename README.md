@@ -1,6 +1,7 @@
 # Daily Stock Price Downloader 🚀
 
-🔁 GitHub Actions Status: [![Workflow](https://github.com/Arun-Lama/Daily-Stock-Price-Download/workflows/Daily%20Stock%20Update/badge.svg)](https://github.com/Arun-Lama/Daily-Stock-Price-Download/actions)  
+GitHub Actions Status: [Workflow](https://github.com/Arun-Lama/Daily-Stock-Price-Download/actions)
+
 🐍 Python 3.8+: [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)  
 📜 License: [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
