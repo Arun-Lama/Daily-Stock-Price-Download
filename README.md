@@ -1,32 +1,111 @@
-# Daily Stock Price Downloader 🚀
+# 📈 Daily Stock Price Downloader 🚀
 
-GitHub Actions Status: [Workflow](https://github.com/Arun-Lama/Daily-Stock-Price-Download/actions)
+![GitHub Workflow Status](https://github.com/Arun-Lama/Daily-Stock-Price-Download/actions/workflows/daily-stock-price.yml/badge.svg)
 
-🐍 Python 3.8+: [![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/)  
-📜 License: [![MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+> A Python automation tool that scrapes daily NEPSE stock prices from Sharesansar and updates a historical dataset in Google Sheets.  
+> The process is fully automated and runs daily using GitHub Actions.
 
-A Python automation tool that scrapes daily Nepalese stock prices from [Sharesansar](https://www.sharesansar.com/) and updates a historical dataset in Google Sheets. The entire process runs automatically via GitHub Actions on a daily schedule.
+---
 
-📊 **[View Live Google Sheet](https://docs.google.com/spreadsheets/d/1n_QX2H3HEM1wYbEQmHV4fYBwfDzd19sBEiOv4MBXrFo/edit?gid=1092951433)**
+## 📊 [View Live Google Sheet](#) <!-- 🔗 Replace `#` with the actual URL -->
 
-## Features ✨
+---
 
-- 🕒 Automated daily scraping of NEPSE stock data
-- 📈 Clean data processing with pandas
-- 🔄 Automatic Google Sheets synchronization
-- 🤖 Headless browser operation with Selenium
-- 📅 Scheduled execution via GitHub Actions (3:15 PM NPT daily)
-- 🔒 Secure credential management with environment variables
-- 📝 Comprehensive logging
+## ✨ Features
+
+- 🕒 **Automated Daily Scraping** of NEPSE stock data from Sharesansar
+- 📈 **Clean Data Processing** using `pandas`
+- 🔄 **Google Sheets Synchronization** via `gspread`
+- 🤖 **Headless Browser Automation** with `Selenium`
+- 📅 **Scheduled Execution** via GitHub Actions (⏰ Every Sunday–Thursday at 3:25 PM NPT)
+- 🔐 **Secure Credential Management** using Base64-encoded environment variables
+- 📋 **Comprehensive Logging** and easy debugging
+- ⚙️ **Lightweight and Serverless** – no hosting or cron job required
+
+---
 
 ## 🛠️ Installation & Setup
 
-### Prerequisites
-- Python 3.8+
-- Google Cloud Platform service account
-- Access to Sharesansar
+### ✅ Prerequisites
 
-### Step 1: Clone the Repository
+- Python **3.8+**
+- A **Google Cloud Platform service account** with Google Sheets & Drive API access
+- Access to **Sharesansar.com**
+- GitHub repository with **Secrets** configured
+
+---
+
+### 🔁 Step 1: Clone the Repository
+
 ```bash
 git clone https://github.com/Arun-Lama/Daily-Stock-Price-Download.git
 cd Daily-Stock-Price-Download
+```
+
+---
+
+### 🔑 Step 2: Configure Secrets
+
+In your GitHub repository:
+
+1. Go to **Settings** → **Secrets and variables** → **Actions**
+2. Add a new **Secret** with:
+   - **Name:** `GCP_SA_KEY_BASE64`
+   - **Value:** Your base64-encoded Google service account JSON key
+
+---
+
+### 🧪 Step 3: Run Locally (Optional)
+
+If you'd like to test the script locally:
+
+```bash
+pip install -r requirements.txt
+python download_indices.py
+```
+
+Make sure to export your environment variable before running:
+
+```bash
+export GCP_SA_KEY_BASE64='your_base64_key_here'
+```
+
+---
+
+## 🔄 Workflow Automation (GitHub Actions)
+
+The script is automatically run via GitHub Actions on this schedule:
+
+```
+🕒 3:25 PM NPT (9:40 AM UTC) | Sunday to Thursday
+```
+
+You can also manually trigger the workflow via the **"Run Workflow"** button in GitHub Actions tab.
+
+---
+
+## 📁 Project Structure
+
+```
+📦 Daily-Stock-Price-Download/
+├── .github/
+│   └── workflows/
+│       └── daily-stock-price.yml
+├── download_indices.py
+├── read_write_google_sheet.py
+├── requirements.txt
+└── README.md
+```
+
+---
+
+## 🧾 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙋‍♂️ Author
+
+Built by [Arun Lama](https://github.com/Arun-Lama)  
+Feel free to ⭐ star the repo and suggest improvements!
