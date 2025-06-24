@@ -1,6 +1,6 @@
 # 📈 Daily Stock Price Downloader 🚀
 
-![GitHub Workflow Status](https://github.com/Arun-Lama/Daily-Stock-Price-Download/actions/workflows/daily-stock-price.yml/badge.svg)
+![GitHub Workflow Status](https://github.com/Arun-Lama/Daily-Stock-Price-Download/actions/workflows/sheet-job.yml/badge.svg)
 
 > A Python automation tool that scrapes daily NEPSE stock prices from Sharesansar and updates a historical dataset in Google Sheets.  
 > The process is fully automated and runs daily using GitHub Actions.
